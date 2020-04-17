@@ -15,13 +15,15 @@ function getItem() {
                 }
                 // Examine the text in the response
                 response.text().then(function (data) {
-                    var avail = data.search(/Ships from and sold by/) !== -1;
+                    var availAmazon = data.search(/Ships from and sold by/) !== -1;
+                    var availWalmart = data.search(/Add to Cart/) !== -1 || data.search(/Add to cart/) !== -1;
+                    var avail = availAmazon || availWalmart;
                     // notification
                     if (avail && items[ctr].name !== 'test') {
                         exec('osascript notification.scpt "' + items[ctr].name + ' in stock"');
                         exec('osascript imessage.scpt "Click on ' + items[ctr].url + '"');
                         exec('osascript say.scpt');
-                        console.log('!!!HEY ' + items[ctr].name + ' in stock');
+                        console.log('!!!HEY ' + items[ctr].name + ' in stocks');
                     }
 
                     items[ctr].instock = avail;
