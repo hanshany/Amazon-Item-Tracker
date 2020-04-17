@@ -23,6 +23,7 @@ function getItem() {
                         exec('osascript notification.scpt "' + items[ctr].name + ' in stock"');
                         exec('osascript imessage.scpt "Click on ' + items[ctr].url + '"');
                         exec('osascript say.scpt');
+                        fs.appendFileSync('results.txt', getCurrentDateAndTime() + ' ' + items[ctr].name + '\n');
                         console.log('!!!HEY ' + items[ctr].name + ' in stocks');
                     }
 
@@ -37,6 +38,13 @@ function getItem() {
                 });
             }
         );
+}
+
+function getCurrentDateAndTime() {
+    var today = new Date();
+    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    return date + ' ' + time;
 }
 
 getItem();
