@@ -8,7 +8,7 @@
     "url": "https://github.com/areichman/amazon-tracker"
   },
   "dependencies": {
-    "node-fetch": "~2.6.0"
+    "node-fetch": "~2.6.7"
   },
   "license": "MIT",
   "private": true
